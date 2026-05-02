@@ -24,7 +24,7 @@ function calcDrift(tokens: TokenInIndex[]): { token: TokenInIndex; currentWeight
   })
 }
 
-export default function RebalanceModal({ index, onClose, creatorWallet }: RebalanceModalProps) {
+export default function RebalanceModal({ index, onClose }: RebalanceModalProps) {
   const [loading, setLoading] = useState(false)
   const [done, setDone] = useState(false)
   const driftData = useState(() => calcDrift(index.tokens))[0]

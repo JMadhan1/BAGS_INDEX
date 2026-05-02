@@ -49,7 +49,6 @@ export default function LeaderboardPage() {
           <div className="grid grid-cols-3 gap-4 mb-8">
             {[entries[1], entries[0], entries[2]].map((entry, podiumIdx) => {
               const rank = podiumIdx === 0 ? 2 : podiumIdx === 1 ? 1 : 3
-              const heights = ['h-28', 'h-36', 'h-24']
               const isTop = rank === 1
               return (
                 <motion.div

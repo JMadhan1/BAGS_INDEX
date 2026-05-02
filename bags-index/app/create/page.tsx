@@ -43,12 +43,13 @@ function CreateContent() {
     if (searchParams.get('demo') === 'true') prefillDemo()
   })
 
-  if (!connected) {
+  // Allow browsing steps 1-3 without a wallet; only block at launch (step 4)
+  if (!connected && step === 4) {
     return (
       <div className="min-h-[60vh] flex items-center justify-center">
         <div className="text-center">
           <h2 className="font-mono text-2xl font-bold mb-3">Connect Your Wallet</h2>
-          <p className="text-[#888888] mb-6">You need a Solana wallet to create an index.</p>
+          <p className="text-[#888888] mb-6">You need a Solana wallet to launch your index.</p>
           <button
             onClick={() => setVisible(true)}
             className="bg-[#00FF87] text-black font-bold px-6 py-3 rounded-xl hover:bg-[#00FF87]/90 transition-all"

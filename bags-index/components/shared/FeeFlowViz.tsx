@@ -18,7 +18,6 @@ export default function FeeFlowViz({ totalFees, totalVolume, creatorWallet }: Fe
     return () => clearInterval(id)
   }, [])
 
-  const bagsFee = totalVolume * 0.01
   const curatorFee = totalVolume * 0.005
   const creatorFee = totalVolume * 0.005
 

@@ -15,6 +15,7 @@ interface CreateState {
   updateWeight: (mint: string, weight: number) => void
   balanceEqually: () => void
   prefillDemo: () => void
+  forkIndex: (index: { name: string; description: string; category: IndexCategory; tokens: TokenInIndex[] }) => void
   reset: () => void
 }
 
@@ -64,6 +65,14 @@ export const useCreateStore = create<CreateState>((set, get) => ({
     category: 'AI Creators',
     selectedTokens: DEMO_TOKENS,
     step: 1,
+  }),
+
+  forkIndex: (index) => set({
+    name: `Fork of ${index.name}`.slice(0, 30),
+    description: index.description,
+    category: index.category,
+    selectedTokens: index.tokens,
+    step: 3,
   }),
 
   reset: () => set({ step: 1, name: '', description: '', category: '', selectedTokens: [] }),

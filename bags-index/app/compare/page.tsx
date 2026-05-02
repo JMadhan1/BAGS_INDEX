@@ -174,7 +174,7 @@ function CompareContent() {
                             </Pie>
                           </PieChart>
                           <div className="flex-1 space-y-1">
-                            {idx.tokens.slice(0, 3).map((t, i) => (
+                            {idx.tokens.slice(0, 3).map((t) => (
                               <div key={t.mint} className="flex items-center gap-1.5 text-[10px]">
                                 <TokenIcon src={t.icon_url} symbol={t.symbol} size={14} />
                                 <span className="text-[#888888]">{t.symbol}</span>

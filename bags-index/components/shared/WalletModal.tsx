@@ -78,7 +78,7 @@ export default function WalletModal({ onClose, onPick }: WalletModalProps) {
                 className="flex items-center gap-3 px-4 py-3 rounded-xl bg-[#1A1A1A] hover:bg-[#222222] transition-colors text-white text-sm font-medium w-full"
               >
                 {w.adapter.icon
-                  ? <img src={w.adapter.icon} alt={w.adapter.name} className="w-6 h-6 rounded-md" />
+                  ? <img src={w.adapter.icon} alt={w.adapter.name} className="w-6 h-6 rounded-md" width={24} height={24} />
                   : <Wallet size={20} className="text-[#888888]" />
                 }
                 {w.adapter.name}

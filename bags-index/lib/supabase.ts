@@ -36,6 +36,7 @@ export async function getIndexes(filters?: { category?: string; sortBy?: string;
     }
     if (filters?.sortBy === 'newest') items.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
     else if (filters?.sortBy === 'holders') items.sort((a, b) => b.holder_count - a.holder_count)
+    else if (filters?.sortBy === 'fees') items.sort((a, b) => b.total_fees_earned - a.total_fees_earned)
     else items.sort((a, b) => b.total_volume_usd - a.total_volume_usd)
     return items.slice(0, filters?.limit ?? 20)
   }
@@ -44,6 +45,7 @@ export async function getIndexes(filters?: { category?: string; sortBy?: string;
   if (filters?.category && filters.category !== 'All') query = query.eq('category', filters.category)
   if (filters?.sortBy === 'newest') query = query.order('created_at', { ascending: false })
   else if (filters?.sortBy === 'holders') query = query.order('holder_count', { ascending: false })
+  else if (filters?.sortBy === 'fees') query = query.order('total_fees_earned', { ascending: false })
   else query = query.order('total_volume_usd', { ascending: false })
   query = query.limit(filters?.limit ?? 20)
 
@@ -54,6 +56,7 @@ export async function getIndexes(filters?: { category?: string; sortBy?: string;
     if (filters?.category && filters.category !== 'All') items = items.filter(i => i.category === filters.category)
     if (filters?.sortBy === 'newest') items.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
     else if (filters?.sortBy === 'holders') items.sort((a, b) => b.holder_count - a.holder_count)
+    else if (filters?.sortBy === 'fees') items.sort((a, b) => b.total_fees_earned - a.total_fees_earned)
     else items.sort((a, b) => b.total_volume_usd - a.total_volume_usd)
     return items.slice(0, filters?.limit ?? 20)
   }

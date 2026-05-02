@@ -8,6 +8,7 @@ import { ArrowRight, Zap } from 'lucide-react'
 import IndexCard from '@/components/marketplace/IndexCard'
 import FilterBar from '@/components/marketplace/FilterBar'
 import StatsBar from '@/components/marketplace/StatsBar'
+import TopIndexes from '@/components/marketplace/TopIndexes'
 import Skeleton from '@/components/shared/Skeleton'
 import LiveActivityFeed from '@/components/shared/LiveActivityFeed'
 import FeesTicker from '@/components/shared/FeesTicker'
@@ -86,6 +87,8 @@ function HomeContent() {
           <StatsBar stats={stats} />
         </div>
       </section>
+
+      <TopIndexes />
 
       <div id="indexes">
         <FilterBar category={category} sortBy={sortBy} onCategory={setCategory} onSort={setSortBy} />

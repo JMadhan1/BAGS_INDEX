@@ -1,10 +1,10 @@
 'use client'
 
 import { useQuery } from '@tanstack/react-query'
-import { useParams, useSearchParams } from 'next/navigation'
+import { useParams, useSearchParams, useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
 import { Suspense } from 'react'
-import { Copy, Share2, Users, BarChart2, Calendar, TrendingUp } from 'lucide-react'
+import { Copy, Share2, Users, BarChart2, Calendar, TrendingUp, GitFork } from 'lucide-react'
 import { toast } from 'sonner'
 import BuyModal from '@/components/index/BuyModal'
 import PerformanceChart from '@/components/index/PerformanceChart'
@@ -16,6 +16,7 @@ import LiveActivityFeed from '@/components/shared/LiveActivityFeed'
 import { getCategoryColor, formatUSD, truncateWallet, generateGradient, timeAgo, TOKEN_COLORS } from '@/lib/utils'
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from 'recharts'
 import type { Index, Holding } from '@/types'
+import { useCreateStore } from '@/store/createStore'
 
 async function fetchIndex(id: string) {
   const res = await fetch(`/api/indexes/${id}`)
@@ -26,7 +27,9 @@ async function fetchIndex(id: string) {
 function IndexContent() {
   const { id } = useParams<{ id: string }>()
   const searchParams = useSearchParams()
+  const router = useRouter()
   const isDemo = searchParams.get('demo') === 'true'
+  const forkIndex = useCreateStore(s => s.forkIndex)
 
   const { data, isLoading } = useQuery({
     queryKey: ['index', id],
@@ -155,11 +158,29 @@ function IndexContent() {
             <HoldersList holders={holders} />
           </div>
 
-          {/* Share Bar */}
+          {/* Fork + Share Bar */}
           <div className="flex flex-wrap items-center gap-3">
+            <button
+              onClick={() => {
+                forkIndex({ name: index.name, description: index.description, category: index.category, tokens: index.tokens })
+                toast.success('Index forked! Customize your version.')
+                router.push('/create')
+              }}
+              className="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-[#1A1A1F] border border-[#00FF87]/30 text-sm text-[#00FF87] hover:bg-[#00FF87]/10 hover:border-[#00FF87] transition-all font-medium"
+            >
+              <GitFork size={14} /> Fork this Index
+            </button>
+            <a
+              href={`/index/${id}/card`}
+              target="_blank"
+              rel="noreferrer"
+              className="flex items-center gap-2 px-4 py-2 rounded-lg bg-[#1A1A1F] border border-[#222222] text-sm text-white hover:border-[#C77DFF] transition-colors"
+            >
+              <Share2 size={14} /> Share Card
+            </a>
             <a href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(tweetText)}`} target="_blank" rel="noreferrer"
               className="flex items-center gap-2 px-4 py-2 rounded-lg bg-[#1A1A1F] border border-[#222222] text-sm text-white hover:border-[#00D4FF] transition-colors">
-              <Share2 size={14} /> Share on Twitter
+              <Share2 size={14} /> Share on X
             </a>
             <button
               onClick={() => { navigator.clipboard.writeText(shareUrl); toast.success('Link copied!') }}

@@ -7,8 +7,9 @@ import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import { useWallet } from '@solana/wallet-adapter-react'
 import { useWalletModal } from '@solana/wallet-adapter-react-ui'
-import { Plus, DollarSign, BarChart2, Layers, Users } from 'lucide-react'
+import { Plus, BarChart2, Layers, Users } from 'lucide-react'
 import StatCard from '@/components/shared/StatCard'
+import LiveFeeCounter from '@/components/shared/LiveFeeCounter'
 import EarningsChart from '@/components/dashboard/EarningsChart'
 import IndexTable from '@/components/dashboard/IndexTable'
 import TradesFeed from '@/components/dashboard/TradesFeed'
@@ -86,7 +87,7 @@ function DashboardContent() {
         </div>
       ) : (
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-          <StatCard label="Total Fees Earned" value={formatUSD(stats?.total_fees_earned ?? 0)} icon={<DollarSign size={16} />} />
+          <LiveFeeCounter totalFees={stats?.total_fees_earned ?? 0} />
           <StatCard label="Volume Generated" value={formatUSD(stats?.total_volume ?? 0)} icon={<BarChart2 size={16} />} />
           <StatCard label="Active Indexes" value={(stats?.index_count ?? 0).toString()} icon={<Layers size={16} />} />
           <StatCard label="Total Holders" value={(stats?.total_holders ?? 0).toString()} icon={<Users size={16} />} />
