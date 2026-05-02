@@ -44,16 +44,15 @@ npm install
 
 ### Environment Variables
 
-Copy `.env.local` and fill in your keys:
+Copy `.env.example` to `.env.local` and fill in your keys:
 
 | Variable | Description |
 |----------|-------------|
 | `NEXT_PUBLIC_SUPABASE_URL` | Your Supabase project URL |
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Supabase anon/public key |
-| `SUPABASE_SERVICE_ROLE_KEY` | Supabase service role key (server-side) |
-| `ANTHROPIC_API_KEY` | Anthropic API key for AI Advisor |
+| `GROQ_API_KEY` | Groq API key for AI Advisor |
 | `BAGS_API_KEY` | Bags API key from dev.bags.fm |
-| `NEXT_PUBLIC_SOLANA_RPC` | Solana RPC endpoint |
+| `NEXT_PUBLIC_SOLANA_RPC` | Solana RPC endpoint (default: https://api.mainnet-beta.solana.com) |
 | `NEXT_PUBLIC_APP_URL` | Your deployed URL |
 
 ### Database
@@ -85,7 +84,41 @@ Append `?demo=true` to any URL to activate demo mode:
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new)
 
-1. Push to GitHub, import in Vercel, add env vars, deploy.
+### Vercel Deployment Steps
+
+1. **Push code to GitHub**
+   ```bash
+   git add .
+   git commit -m "Ready for Vercel deployment"
+   git push origin main
+   ```
+
+2. **Import project in Vercel**
+   - Go to [vercel.com/new](https://vercel.com/new)
+   - Import your GitHub repository
+   - Vercel will automatically detect Next.js
+
+3. **Configure Environment Variables**
+   Add these in Vercel Project Settings > Environment Variables:
+   - `NEXT_PUBLIC_SUPABASE_URL`
+   - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+   - `GROQ_API_KEY`
+   - `BAGS_API_KEY`
+   - `NEXT_PUBLIC_SOLANA_RPC` (optional, defaults to mainnet)
+   - `NEXT_PUBLIC_APP_URL` (set to your Vercel domain after first deploy)
+
+4. **Deploy**
+   - Click "Deploy"
+   - Wait for build to complete
+   - Update `NEXT_PUBLIC_APP_URL` with your deployed domain
+   - Redeploy if needed
+
+### Database Setup
+
+Before deploying, set up Supabase:
+1. Create a new project at [supabase.com](https://supabase.com)
+2. Run the migration: `supabase/migrations/001_initial.sql`
+3. Copy your project URL and anon key to Vercel env vars
 
 ## Bags API Integration
 

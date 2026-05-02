@@ -1,0 +1,13 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": ".next",
+  "framework": "nextjs",
+  "env": {
+    "NEXT_PUBLIC_SUPABASE_URL": "@supabase-url",
+    "NEXT_PUBLIC_SUPABASE_ANON_KEY": "@supabase-anon-key",
+    "NEXT_PUBLIC_SOLANA_RPC": "@solana-rpc",
+    "BAGS_API_KEY": "@bags-api-key",
+    "GROQ_API_KEY": "@groq-api-key",
+    "NEXT_PUBLIC_APP_URL": "@app-url"
+  }
+}
